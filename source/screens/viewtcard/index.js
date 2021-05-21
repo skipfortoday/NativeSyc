@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet } from 'react-native';
 import { Button, Divider, Icon, List, ListItem, TopNavigation, TopNavigationAction, Tab,
-   Layout, TabView, Text } from '@ui-kitten/components';
+    Layout, TabView, Text } from '@ui-kitten/components';
 
 const HomeIcon = (props) => (
   <Icon {...props} name='home-outline'/>
@@ -19,7 +19,7 @@ const data = new Array(8).fill({
   description: 'Description for Item',
 });
 
-export const Home = () => {
+export const viewtcard = () => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const renderSettingsAction = () => (
     <TopNavigationAction icon={SettingsIcon}/>
@@ -50,26 +50,29 @@ export const Home = () => {
     <React.Fragment>
       <TopNavigation
         style={styles.navigation}
-        title='List Server Online'
+        title='List data table Tcard'
         accessoryLeft={renderBackAction}
         accessoryRight={renderSettingsAction}
       />
       <TabView
       selectedIndex={selectedIndex}
       onSelect={index => setSelectedIndex(index)}>
-      <Tab title='DB Tcard'>
+      <Tab title='Hari Ini'>
         <Layout>
         <Divider/>
         <List
         style={styles.container}
         data={data}
-        renderItem={renderItem}
-      /></Layout>
+        renderItem={renderItem}/>
+        </Layout>
       </Tab>
-      <Tab title='DB Kartu Pasien'>
+      <Tab title='All Data'>
         <Layout>
         <Divider/>
-       <Text>List Online Kartu Pasien</Text>
+        <List
+        style={styles.container}
+        data={data}
+        renderItem={renderItem}/>
        </Layout>
       </Tab>
     </TabView>
@@ -86,4 +89,4 @@ const styles = StyleSheet.create({
     marginTop: 20,
   }
 });
-export default connect()(Home);
+export default connect()(viewtcard);
