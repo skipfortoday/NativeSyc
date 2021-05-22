@@ -1,89 +1,94 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { StyleSheet } from 'react-native';
-import { Button, Divider, Icon, List, ListItem, TopNavigation, TopNavigationAction, Tab,
-   Layout, TabView, Text } from '@ui-kitten/components';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import {  StyleSheet } from "react-native";
+import {
+  Divider,
+  Icon,
+  List,
+  ListItem,
+  TopNavigation,
+  TopNavigationAction,
+  Tab,
+  Layout,
+  TabView,
+} from "@ui-kitten/components";
+import NavbarBottom from "../../components/NavbarBottom";
+import ListViewRender from '../../components/ListViewRender';
 
-const HomeIcon = (props) => (
-  <Icon {...props} name='home-outline'/>
-);
-
-
-
-const SettingsIcon = (props) => (
-  <Icon {...props} name='settings'/>
-);
-
-const data = new Array(8).fill({
-  title: 'Title for Item',
-  description: 'Description for Item',
-});
-
-export const Home = () => {
+export const Home = (props) => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
-  const renderSettingsAction = () => (
-    <TopNavigationAction icon={SettingsIcon}/>
-  );
-
-  const renderBackAction = () => (
-    <TopNavigationAction icon={HomeIcon}/>
-  );
-
+  const data = new Array(8).fill({
+    title: 'Title for Item',
+    description: 'Description for Item',
+  });
+  const renderBackAction = () => <TopNavigationAction icon={renderItemIcon} />;
   const renderItemAccessory = (props) => (
-    <Button size='tiny'>Online</Button>
+    <Icon {...props} name="wifi-outline" />
   );
-
   const renderItemIcon = (props) => (
-    <Icon {...props} name='hard-drive-outline'/>
+    <Icon {...props} name="hard-drive-outline" />
   );
 
-  const renderItem = ({ item, index }) => (
+  const renderItem = ({index}) => (
     <ListItem
-      title={`Server ${index + 1}`}
+      index={index}
+      title={`Server Kartu Pasien ${index + 1}`}
       description={`Terakhir Online ${index + 1}`}
       accessoryLeft={renderItemIcon}
       accessoryRight={renderItemAccessory}
+      onPress={() => props.navigation.navigate('viewtcard',{serverid: index})}
     />
   );
-
+  
   return (
-    <React.Fragment>
-      <TopNavigation
+      <Layout>
+         <TopNavigation
         style={styles.navigation}
-        title='List Server Online'
+        title="List Server Online"
         accessoryLeft={renderBackAction}
-        accessoryRight={renderSettingsAction}
       />
-      <TabView
-      selectedIndex={selectedIndex}
-      onSelect={index => setSelectedIndex(index)}>
-      <Tab title='DB Tcard'>
-        <Layout>
-        <Divider/>
-        <List
-        style={styles.container}
-        data={data}
-        renderItem={renderItem}
-      /></Layout>
-      </Tab>
-      <Tab title='DB Kartu Pasien'>
-        <Layout>
-        <Divider/>
-       <Text>List Online Kartu Pasien</Text>
-       </Layout>
-      </Tab>
-    </TabView>
-    </React.Fragment>
+        <TabView
+          selectedIndex={selectedIndex}
+          onSelect={(index) => setSelectedIndex(index)}
+        >
+          <Tab title="DB Tcard">
+            <Layout>
+              <Divider />
+              {/* <List
+                title="T-CARD"
+                style={styles.container}
+                data={data}
+                renderItem={renderItemTest}
+              /> */}
+              <ListViewRender data={data}/>
+            </Layout>
+          </Tab>
+          <Tab title="DB Kartu Pasien">
+            <Layout>
+              <Divider />
+              <List
+                title="KARTU PASIEN"
+                style={styles.container}
+                data={data}
+                renderItem={renderItem}
+              />
+            </Layout>
+          </Tab>
+        </TabView>
+        <NavbarBottom/>
+      </Layout>
+     
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    // maxHeight: 500,
+    maxHeight: 500,
+    minHeight: '75%',
   },
-  navigation: 
-  {
-    marginTop: 20,
-  }
+  navigation: {
+    marginTop: 18,
+  },
 });
+
 export default connect()(Home);

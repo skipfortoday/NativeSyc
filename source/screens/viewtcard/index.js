@@ -2,12 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet } from 'react-native';
 import { Button, Divider, Icon, List, ListItem, TopNavigation, TopNavigationAction, Tab,
-    Layout, TabView, Text } from '@ui-kitten/components';
+    Layout, TabView, Text, BottomNavigation, BottomNavigationTab } from '@ui-kitten/components';
 
 const HomeIcon = (props) => (
   <Icon {...props} name='home-outline'/>
 );
 
+const useBottomNavigationState = (initialState = 0) => {
+  const [selectedIndex, setSelectedIndex] = React.useState(initialState);
+  return { selectedIndex, onSelect: setSelectedIndex };
+};
 
 
 const SettingsIcon = (props) => (
@@ -19,7 +23,8 @@ const data = new Array(8).fill({
   description: 'Description for Item',
 });
 
-export const viewtcard = () => {
+export const viewtcard = (props) => {
+  const bottomState = useBottomNavigationState();
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const renderSettingsAction = () => (
     <TopNavigationAction icon={SettingsIcon}/>
@@ -43,6 +48,7 @@ export const viewtcard = () => {
       description={`Terakhir Online ${index + 1}`}
       accessoryLeft={renderItemIcon}
       accessoryRight={renderItemAccessory}
+      onPress={() => console.log(props)}
     />
   );
 
@@ -76,6 +82,11 @@ export const viewtcard = () => {
        </Layout>
       </Tab>
     </TabView>
+    {/* <BottomNavigation style={styles.bottomNavigation} {...bottomState} onSelect={() => props.navigation.navigate('Home')}>
+       <BottomNavigationTab
+        icon={renderItemIcon}
+        />
+      </BottomNavigation> */}
     </React.Fragment>
   );
 };
@@ -87,6 +98,9 @@ const styles = StyleSheet.create({
   navigation: 
   {
     marginTop: 20,
-  }
+  },
+  bottomNavigation: {
+    marginVertical: 8,
+  },
 });
 export default connect()(viewtcard);
