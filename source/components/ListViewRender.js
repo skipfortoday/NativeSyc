@@ -1,7 +1,6 @@
 import React from "react";
-import { connect } from "react-redux";
 import { ListItem,Icon, List } from "@ui-kitten/components";
-import { View, Text,StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const renderItemAccessory = (props) => <Icon {...props} name="wifi-outline" />;
 const renderItemIcon = (props) => <Icon {...props} name="hard-drive-outline" />;
@@ -13,45 +12,24 @@ export default ListViewRender =(props) => {
         title="T-CARD"
         style={styles.container}
         data={props.data}
-        renderItem={() => {
+        renderItem={(index) => {
             return(
-                <View>
-                    <Text>Test</Text>
-                </View>
+              <ListItem
+              title="tes"
+              description={`Terakhir Online ${index.index + 1}`}
+              accessoryLeft={renderItemIcon}
+              accessoryRight={renderItemAccessory}
+              onPress={() => props.link.navigation.navigate('viewtcard',{serverid: index})}
+            />
             )
         }}
         />
     )
 }
-
-
-
-const renderItemTest = ({index,props}) => (
-    <ListItem
-      index={index}
-      title="tes"
-    //   title={`Server Tcard ${index + 1}`}
-      description={`Terakhir Online ${index + 1}`}
-      accessoryLeft={renderItemIcon}
-      accessoryRight={renderItemAccessory}
-      onPress={() => props.navigation.navigate('viewtcard',{serverid: index})}
-    />
-);
-
-// const ListViewRender = ({ index }) => (
-//   <ListItem
-//     index={index}
-//     title={`Server Tcard ${index + 1}`}
-//     description={`Terakhir Online ${index + 1}`}
-//     accessoryLeft={renderItemIcon}
-//     accessoryRight={renderItemAccessory}
-//     onPress={() => props.navigation.navigate("viewtcard", { serverid: index })}
-//   />
-// );
 const styles = StyleSheet.create({
     container: {
       maxHeight: 500,
       minHeight: '75%',
     },
   });
-// export default connect()(ListViewRender);
+

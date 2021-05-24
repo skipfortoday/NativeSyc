@@ -1,7 +1,8 @@
 import { FETCH_ALL_DATA } from '../constants/app';
 
 const initialState = {
-  data: []
+  data: [],
+  test: false
 }
 
 export const app = (state = initialState, action) => {

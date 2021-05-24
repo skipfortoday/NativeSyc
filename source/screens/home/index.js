@@ -6,14 +6,13 @@ import {
   Icon,
   List,
   ListItem,
-  TopNavigation,
-  TopNavigationAction,
   Tab,
   Layout,
   TabView,
 } from "@ui-kitten/components";
 import NavbarBottom from "../../components/NavbarBottom";
 import ListViewRender from '../../components/ListViewRender';
+import NavbarTop from "../../components/NavbarTop";
 
 export const Home = (props) => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
@@ -21,7 +20,6 @@ export const Home = (props) => {
     title: 'Title for Item',
     description: 'Description for Item',
   });
-  const renderBackAction = () => <TopNavigationAction icon={renderItemIcon} />;
   const renderItemAccessory = (props) => (
     <Icon {...props} name="wifi-outline" />
   );
@@ -42,11 +40,7 @@ export const Home = (props) => {
   
   return (
       <Layout>
-         <TopNavigation
-        style={styles.navigation}
-        title="List Server Online"
-        accessoryLeft={renderBackAction}
-      />
+      <NavbarTop/>
         <TabView
           selectedIndex={selectedIndex}
           onSelect={(index) => setSelectedIndex(index)}
@@ -54,13 +48,7 @@ export const Home = (props) => {
           <Tab title="DB Tcard">
             <Layout>
               <Divider />
-              {/* <List
-                title="T-CARD"
-                style={styles.container}
-                data={data}
-                renderItem={renderItemTest}
-              /> */}
-              <ListViewRender data={data}/>
+              <ListViewRender data={data} link={props}/>
             </Layout>
           </Tab>
           <Tab title="DB Kartu Pasien">
