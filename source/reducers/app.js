@@ -1,16 +1,16 @@
 import { FETCH_ALL_DATA } from '../constants/app';
 
 const initialState = {
-  data: [],
+  getDataUser: false,
   test: false
 }
 
 export const app = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_ALL_DATA:
-      status == 403 
       return {
-        data: action.data
+        ...state,
+        getDataUser: action.data
       }
     default:
       return state;

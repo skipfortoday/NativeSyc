@@ -6,7 +6,7 @@ const dataFetch = data => ({
   data,
 });
 
-export const fetchDataAll = () => dispatch => {
+export const getDataUser = () => dispatch => {
   axios.get('https://jsonplaceholder.typicode.com/users')
     .then((response) => {
       dispatch(dataFetch(response.data));
