@@ -13,7 +13,6 @@ const mapStateToProps = (state) => {
 };
 
 const Home = (props) => {
-  
   useEffect(() => {
     if(!props.getDataUser){
       props.dispatch(getDataUser())
@@ -21,13 +20,9 @@ const Home = (props) => {
   });
 
   const [selectedIndex, setSelectedIndex] = React.useState(0);
-  const data = new Array(8).fill({
-    title: "Title for Item",
-    description: "Description for Item",
-  });
   return (
     <Layout>
-      <NavbarTop />
+      <NavbarTop link={props}/>
       <TabView
         selectedIndex={selectedIndex}
         onSelect={(index) => setSelectedIndex(index)}
@@ -35,17 +30,17 @@ const Home = (props) => {
         <Tab title="DB Tcard">
           <Layout>
             <Divider />
-            <ListViewRender data={data} link={props} />
+            <ListViewRender data={props.getDataUser} link={props} tittle='name' desc='username'  />
           </Layout>
         </Tab>
         <Tab title="DB Kartu Pasien">
           <Layout>
             <Divider />
-            <ListViewRender data={data} link={props} />
+            <ListViewRender data={props.getDataUser} link={props} tittle='id' desc='email' />
           </Layout>
         </Tab>
       </TabView>
-      <NavbarBottom />
+      <NavbarBottom link={props}/>
     </Layout>
   );
 };

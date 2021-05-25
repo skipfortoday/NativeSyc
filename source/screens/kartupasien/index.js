@@ -10,22 +10,13 @@ const mapStateToProps = (state) => {
   };
 };
 
-
-
-const viewtcard = (props) => {
-  useEffect(() => {
-    console.log(props.navigation)
-  });
-  
+const kartupasien = (props) => {
   return (
     <Layout>
       <NavbarTop link={props}/>
-      <Button onPress={()=>
-        props.navigation.navigate('KartuPasien')
-      }></Button>
       <NavbarBottom link={props}/>
     </Layout>
   );
 };
 
-export default connect(mapStateToProps, null)(viewtcard);
+export default connect(mapStateToProps, null)(kartupasien);

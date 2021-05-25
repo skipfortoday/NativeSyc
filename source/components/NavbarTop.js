@@ -9,15 +9,17 @@ import {
 const renderBackAction = () => <TopNavigationAction icon={renderItemIcon} />;
 const renderItemIcon = (props) => <Icon {...props} name="hard-drive-outline" />;
 
-export default NavbarTop = () => {
+export default NavbarTop = (props) => {
   return (
     <TopNavigation
       style={styles.navigation}
-      title="List data table Tcard"
+      title={props.link.navigation.state.routeName}
       accessoryLeft={renderBackAction}
     />
   );
 };
+
+
 const styles = StyleSheet.create({
     navigation: {
       marginTop: 18,

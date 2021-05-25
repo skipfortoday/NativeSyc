@@ -14,6 +14,7 @@ import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import Store from "./reduxStore";
 import Home from "./screens/home";
 import viewtcard from "./screens/viewtcard";
+import kartupasien  from "./screens/kartupasien";
 
 
 const Router = createStackNavigator(
@@ -24,6 +25,9 @@ const Router = createStackNavigator(
     viewtcard: {
       screen: viewtcard,
     },
+    KartuPasien: {
+      screen: kartupasien,
+    }
   },
   {
     index: 0,

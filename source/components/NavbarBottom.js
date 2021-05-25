@@ -23,7 +23,7 @@ const NavbarBottom = (props) => {
       <BottomNavigation
         style={styles.bottomNavigation}
         {...bottomState}
-        onSelect={() => props.navigation.navigate("Home")}
+        onSelect={() => props.link.navigation.navigate('Home')}
       >
         <BottomNavigationTab icon={renderItemIcon} />
       </BottomNavigation>
